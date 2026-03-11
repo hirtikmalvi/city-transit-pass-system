@@ -1,0 +1,19 @@
+# Node
+node_modules
+dist
+npm-debug.log*
+
+# Environment
+.env
+
+# .NET
+bin/
+obj/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
