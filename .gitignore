@@ -12,6 +12,7 @@ obj/
 
 # IDE
 .vscode/
+.vs/
 .idea/
 
 # OS
