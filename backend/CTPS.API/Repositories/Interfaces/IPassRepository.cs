@@ -8,5 +8,7 @@ namespace CTPS.API.Repositories.Interfaces
     {
         Task<List<PassType>> GetAllPassTypes();
         Task<PassType?> GetPassTypeById(int passTypeId);
+        Task<int?> AddPass(UserPass request);
+        Task AutoExpirePasses(int userId);
     }
 }

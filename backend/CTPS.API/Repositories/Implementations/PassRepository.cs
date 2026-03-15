@@ -29,5 +29,27 @@ namespace CTPS.API.Repositories.Implementations
                .FirstOrDefaultAsync(p => p.Id == passTypeId);
             return passType;
         }
+
+        public async Task<int?> AddPass(UserPass request)
+        {
+            var createdUserPass = await context.UserPasses.AddAsync(request);
+            await context.SaveChangesAsync();
+            return createdUserPass.Entity.Id;
+        }
+
+        public async Task AutoExpirePasses(int userId)
+        {
+            var expiredPasses = await context.UserPasses
+                .Where(up => up.UserId == userId
+                    && up.Status == "Active"
+                    && up.ExpiryDate < DateTime.Now)
+                .ToListAsync();
+
+            foreach (var pass in expiredPasses)
+                pass.Status = "Expired";
+
+            if (expiredPasses.Count > 0)
+                await context.SaveChangesAsync();
+        }
     }
 }

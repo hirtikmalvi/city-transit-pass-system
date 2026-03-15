@@ -7,5 +7,7 @@ namespace CTPS.API.Services.Interfaces
     {
         Task<Result<List<PassTypeResponseDTO>>> GetAllPassTypes();
         Task<Result<PassTypeResponseDTO?>> GetPassTypeById(int passTypeId);
+        Task<Result<PurchasePassResponseDTO>> PurchasePass(PurchasePassRequestDTO request);
+        Task<Result<List<UserPassResponseDTO>>> GetUserPasses(int userId);
     }
 }
