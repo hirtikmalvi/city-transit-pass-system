@@ -35,13 +35,13 @@ public partial class UserPass
     public string Status { get; set; } = null!;
 
     [ForeignKey("PassTypeId")]
-    [InverseProperty("Userpasses")]
+    [InverseProperty("UserPasses")]
     public virtual PassType? PassType { get; set; }
 
     [InverseProperty("UserPass")]
     public virtual ICollection<Trip> Trips { get; set; } = new List<Trip>();
 
     [ForeignKey("UserId")]
-    [InverseProperty("Userpasses")]
+    [InverseProperty("UserPasses")]
     public virtual User? User { get; set; }
 }
