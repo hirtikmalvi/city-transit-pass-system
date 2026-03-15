@@ -21,7 +21,15 @@ namespace CTPS.API.Controllers
         [HttpGet("types")]
         public async Task<ActionResult<Result<List<PassTypeResponseDTO>>>> GetAllPassTypes()
         {
-            var result = await passService.GetAllPassTypesAsync();
+            var result = await passService.GetAllPassTypes();
+            return Ok(result);
+        }
+
+        // GET /api/passes/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Result<PassTypeResponseDTO>>> GetPassById([FromRoute] int id) 
+        {
+            var result = await passService.GetPassTypeById(id);
             return Ok(result);
         }
     }

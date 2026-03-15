@@ -3,6 +3,7 @@ using CTPS.API.Data;
 using CTPS.API.DTOs.Pass;
 using CTPS.API.Repositories.Interfaces;
 using CTPS.API.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CTPS.API.Services.Implementations
 {
@@ -29,6 +30,25 @@ namespace CTPS.API.Services.Implementations
 
             return Result<List<PassTypeResponseDTO>>.Ok(response, 200);
         }
+        public async Task<Result<PassTypeResponseDTO?>> GetPassTypeById(int passTypeId)
+        {
+            var passType = await passRepository.GetPassTypeById(passTypeId);
 
+            if (passType == null)
+            {
+                return Result<PassTypeResponseDTO?>.Fail(404);
+            }
+
+            var passTypeResponse = new PassTypeResponseDTO
+            {
+                Id = passType.Id,
+                Name = passType.Name,
+                ValidityDays = passType.ValidityDays,
+                Price = passType.Price,
+                MaxTripsPerDay = passType.MaxTripsPerDay,
+                TransportModes = passType.TransportModes.Select(tm => tm.Code.ToString()).ToList()
+            };
+            return Result<PassTypeResponseDTO?>.Ok(passTypeResponse, 200);
+        }
     }
 }
