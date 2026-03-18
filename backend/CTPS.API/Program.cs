@@ -22,9 +22,11 @@ builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelS
 // Repositories
 builder.Services.AddScoped<IPassRepository, PassRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITripsRepository, TripRepository>();
 
 // Services 
 builder.Services.AddScoped<IPassService, PassService>();
+builder.Services.AddScoped<IValidationService, ValidationService>();
 
 var app = builder.Build();
 

@@ -1,4 +1,4 @@
-﻿namespace CTPS.API.DTOs.Pass
+﻿namespace CTPS.API.DTOs.Validation
 {
     public class ValidatePassRequestDTO
     {

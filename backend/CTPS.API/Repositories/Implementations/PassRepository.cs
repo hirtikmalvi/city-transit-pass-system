@@ -51,5 +51,22 @@ namespace CTPS.API.Repositories.Implementations
             if (expiredPasses.Count > 0)
                 await context.SaveChangesAsync();
         }
+
+        public async Task<UserPass?> GetUserPassByCode(string passCode)
+        {
+            var userPass = await context.UserPasses
+                .Include(up => up.User)
+                .Include(up => up.PassType)
+                    .ThenInclude(pt => pt!.TransportModes)
+                .Include(up => up.Trips)
+                .FirstOrDefaultAsync(up => up.PassCode == passCode);
+
+            return userPass;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await context.SaveChangesAsync();
+        }
     }
 }

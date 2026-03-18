@@ -1,6 +1,6 @@
-﻿namespace CTPS.API.DTOs.Pass
+﻿namespace CTPS.API.DTOs.Validation
 {
-    public class ValidatePassResponeDTO
+    public class ValidatePassResponseDTO
     {
         public bool IsValid { get; set; }
         public string Message { get; set; } = null!;

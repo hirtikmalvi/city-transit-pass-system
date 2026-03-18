@@ -10,5 +10,7 @@ namespace CTPS.API.Repositories.Interfaces
         Task<PassType?> GetPassTypeById(int passTypeId);
         Task<int?> AddPass(UserPass request);
         Task AutoExpirePasses(int userId);
+        Task<UserPass?> GetUserPassByCode(string passCode);
+        Task SaveChangesAsync();
     }
 }
