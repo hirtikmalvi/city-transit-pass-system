@@ -27,6 +27,7 @@ builder.Services.AddScoped<ITripsRepository, TripRepository>();
 // Services 
 builder.Services.AddScoped<IPassService, PassService>();
 builder.Services.AddScoped<IValidationService, ValidationService>();
+builder.Services.AddScoped<ITripService, TripService>();
 
 var app = builder.Build();
 
