@@ -1,15 +1,27 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from './features/auth/components/ProtectedRoute';
+import { useAuth } from './features/auth/AuthContext';
 import CommuterDashboard from './pages/CommuterDashboard';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Automatically redirect the home page to your commuter dashboard for now */}
-        <Route path="/" element={<Navigate to="/commuter" replace />} />
-        
-        {/* Your Commuter Route */}
-        <Route path="/commuter" element={<CommuterDashboard />} />
+        <Route path="/" element={<Navigate to={isAuthenticated ? '/commuter' : '/login'} replace />} />
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/commuter" replace /> : <Login />} />
+        <Route path="/register" element={isAuthenticated ? <Navigate to="/commuter" replace /> : <Register />} />
+        <Route
+          path="/commuter"
+          element={
+            <ProtectedRoute>
+              <CommuterDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

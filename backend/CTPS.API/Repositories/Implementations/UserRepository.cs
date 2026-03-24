@@ -19,6 +19,24 @@ namespace CTPS.API.Repositories.Implementations
             return user;
         }
 
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            string normalizedEmail = email.ToLower();
+            return await context.Users.FirstOrDefaultAsync(user => user.Email != null && user.Email.ToLower() == normalizedEmail);
+        }
+
+        public async Task<User?> GetUserByMobile(string mobile)
+        {
+            return await context.Users.FirstOrDefaultAsync(user => user.Mobile == mobile);
+        }
+
+        public async Task<User> CreateUser(User user)
+        {
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
+            return user;
+        }
+
         public async Task<List<UserPass>> GetUserPasses(int userId)
         {
             var passes = await context.UserPasses.
